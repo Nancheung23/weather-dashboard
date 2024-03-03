@@ -1,0 +1,973 @@
+/* Zero out padding and margin on nav items */
+.nav,
+.navbar-nav {
+    padding: 0;
+    margin: 0;
+}
+
+#navbar {
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* set my icon to center */
+.navbar-brand,
+.navbar-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#icon {
+    height: auto;
+    width: 3vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* set nav bar feature */
+.navbar-text {
+    font-size: 2rem;
+    /* using "Bungee Spice" font */
+    font-family: "Bungee Spice", sans-serif;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    font-style: bold;
+}
+
+.nav-round {
+    border-radius: 1em;
+    margin: 2vh 2vw;
+    border: none;
+    opacity: 0.95;
+    background: linear-gradient(90deg, #37045c, #670460, #8e1761, #b03260, #cc505e, #e3705e, #f39262, #ffb56b);
+    box-shadow: 1px 1px 2px #4d7d5a;
+}
+
+.nav-link {
+    color: rgb(0, 0, 0) !important;
+    font-size: 2rem;
+    /* using "Eczar" font */
+    font-family: "Eczar", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #0dc4b4 !important;
+    transition-delay: 0.3s;
+    text-shadow: 0px 1px 5px silver;
+}
+
+/* background */
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* layout of boxes */
+#Current,
+#Forecast {
+    background: rgba(18, 18, 18, 0.35);
+    /* inset border shadow */
+    box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    border-radius: 3rem;
+    max-width: 90%;
+}
+
+#Forecast {
+    justify-content: center;
+}
+
+.general {
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 2vh;
+}
+
+#ip-location {
+    max-width: 40%;
+    background-color: rgba(90, 89, 89, 0.88);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 5vh;
+    border-radius: 2rem;
+    font-size: 2vh;
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: aliceblue;
+}
+
+/* adjust flag */
+#ip-location img {
+    height: 1em;
+    width: 1em;
+}
+
+#time-detail {
+    background-color: rgba(90, 89, 89, 0.88);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 2rem;
+    /* use "Ubuntu" font */
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: antiquewhite;
+}
+
+/* adjust circles */
+.circle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.circle>div {
+    flex: 1 1 30%;
+    max-width: 30%;
+    display: flex;
+    flex-direction: row;
+    margin: 1vw;
+}
+
+#temp .numbers,
+#apparent_temp .numbers,
+#cloud .numbers,
+#humidity .numbers {
+    /* border -> animation effect*/
+    border-radius: 50%;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.75);
+    /* hide */
+    overflow: hidden;
+    /* others */
+    text-align: center;
+    margin: 0 auto 0 auto;
+    width: 10vw;
+    height: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+    color: beige;
+    /* use "Protest Riot" font */
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+#temp .numbers div,
+#apparent_temp .numbers div,
+#cloud .numbers div,
+#humidity .numbers div {
+    z-index: 2;
+}
+
+/* before */
+#temp .numbers::before,
+#apparent_temp .numbers::before,
+#cloud .numbers::before,
+#humidity .numbers::before {
+    content: "";
+    position: absolute;
+    width: 10vw;
+    height: 10vw;
+    background-image: conic-gradient(transparent, transparent, transparent, #8587ff);
+    animation: animate 6s linear infinite;
+}
+
+/* after */
+#temp .numbers::after,
+#apparent_temp .numbers::after,
+#cloud .numbers::after,
+#humidity .numbers::after {
+    content: "";
+    position: absolute;
+    width: 10vw;
+    height: 10vw;
+    background-image: conic-gradient(transparent, transparent, transparent, #5cb8e4);
+    animation: animate 6s linear infinite;
+    animation-delay: -4s;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* block layer */
+#temp .numbers span,
+#apparent_temp .numbers span,
+#cloud .numbers span,
+#humidity .numbers span {
+    position: absolute;
+    inset: 0.2em;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 1);
+    z-index: 1;
+}
+
+#temp .title,
+#apparent_temp .title,
+#cloud .title,
+#humidity .title {
+    width: 15vw;
+    height: auto;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    font-size: 3vh;
+    overflow-wrap: break-word;
+    text-align: center;
+    /* use "Eczar" font */
+    font-family: "Eczar", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    color: azure;
+}
+
+/* adjust details */
+.detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 3vh;
+    min-height: 70%;
+    flex-wrap: nowrap;
+    padding: 1vw;
+    margin: 0.5vw;
+    font-size: 3vh;
+    color: cornsilk;
+    /* use "Anybody" font */
+    font-family: "Anybody", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+#rain,
+#snow,
+#precipitation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#shower,
+#wind,
+#pressure {
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(90, 89, 89, 0.88);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    border-radius: 2rem;
+    padding: 1vw;
+}
+
+#wind,
+#pressure {
+    min-width: 30vw;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5vh;
+}
+
+/* adjust daily weather box */
+.day-weather {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* border: 0.4rem solid #ccb7b7; */
+    border-radius: 1.8rem;
+    padding: 1vw;
+    margin: 1vw;
+    background: linear-gradient(180deg,
+            rgba(111, 209, 207, 0.7),
+            /* #6fd1cf with 70% opacity */
+            rgba(92, 207, 227, 0.7),
+            /* #5ccfe3 with 70% opacity */
+            rgba(91, 204, 246, 0.7),
+            /* #5bccf6 with 70% opacity */
+            rgba(114, 197, 255, 0.7),
+            /* #72c5ff with 70% opacity */
+            rgba(150, 188, 255, 0.7),
+            /* #96bcff with 70% opacity */
+            rgba(190, 176, 255, 0.7),
+            /* #beb0ff with 70% opacity */
+            rgba(226, 163, 242, 0.7),
+            /* #e2a3f2 with 70% opacity */
+            rgba(255, 150, 215, 0.7)
+            /* #ff96d7 with 70% opacity */
+        );
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    /* transform smoothly */
+    transition: transform 0.3s ease;
+}
+
+/* hover for day-weather */
+.day-weather:hover {
+    transform: translate(-0.2em, -0.2em) scale(1.1);
+}
+
+.dayBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dayBox-text {
+    display: block;
+    text-align: center;
+    font-size: 2vh;
+    /* use "Ubuntu" font */
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: rgb(238, 232, 229);
+}
+
+.dayBox-value {
+    display: block;
+    text-align: center;
+    font-size: 1.7vh;
+    /* use "Protest Riot" font */
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(250, 250, 250);
+    text-shadow: 0.1rem 0.1rem black;
+}
+
+#Charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(18, 18, 18, 0.35);
+    /* inset border shadow */
+    box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vh auto;
+    border-radius: 3rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buttons button {
+    border-radius: 1vw;
+    width: 15vw;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: 0.1rem 0.1rem rgb(81, 78, 78);
+    transition: transform 0.3s ease;
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: bold;
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+}
+
+.buttons button:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+}
+
+.canvas-box {
+    margin: 2vh 1vw;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+}
+
+canvas {
+    width: 80vw;
+    height: 80vh;
+}
+
+/* history */
+#History {
+    position: relative;
+    background: rgba(18, 18, 18, 0.35);
+    /* inset border shadow */
+    box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vh auto;
+           padding:  1vw;
+    border-radius: 3rem;
+    z-index: 0;
+}
+
+.dropdown-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dropdown-area .dropdown-element,
+#dropdown-statistics {
+    border-radius: 1vw;
+    width: 15vw;
+    margin-top: 2vh;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: 0.07rem 0.07rem rgb(109, 104, 104);
+    transition: transform 0.3s ease;
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: bold;
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+}
+
+.dropdown-area .dropdown-element:hover,
+#dropdown-statistics:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+}
+
+#weatherList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.3rem;
+    border-radius: 1rem;
+}
+
+.history-aside {
+    position: fixed;
+    z-index: 1000;
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.history-aside-button {
+    border-radius: 2rem;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: bold;
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+}
+
+.history-aside-button:hover {
+    transform: scale(1.1);
+}
+
+.dayBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20vw;
+    text-align: center;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    border-radius: 2rem;
+    margin: 2vh auto;
+    transition: transform 0.3s ease;
+}
+
+.dayBlock:hover {
+    transform: scale(1.1);
+    background: linear-gradient(90deg, #bab82e, #a6ae26, #93a51e, #809b16, #6d910f, #5b8708, #487d03, #347300);
+}
+
+.dayBlock-element {
+    padding: 2vw;
+    /* use "Ubuntu" font */
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: antiquewhite;
+}
+
+#Statistics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(18, 18, 18, 0.35);
+    /* inset border shadow */
+    box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vh auto;
+    border-radius: 3rem;
+    max-width: 90%;
+}
+
+#table {
+    background-color: rgba(90, 89, 89, 0.88);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    margin: 1vw;
+    border-radius: 2rem;
+    border-collapse: separate;
+    width: 90%;
+    padding: 2vw;
+    font-size: large;
+}
+
+thead {
+    /* use "Protest Riot" font */
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(250, 250, 250);
+    text-shadow: 0.1rem 0.1rem black;
+    letter-spacing: 0.2rem;
+}
+
+
+tbody {
+    /* use "Ubuntu" font */
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(17, 206, 127);
+    text-shadow: 0.1rem 0.1rem rgb(43, 40, 40);
+    letter-spacing: 0.2rem;
+}
+
+tbody tr {
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+tbody tr:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #1f005c, #5b0060, #870160, #ac255e, #ca485c, #e16b5c, #f39060, #ffb56b);
+}
+
+#container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    min-height: 100vh;
+    z-index: 9999;
+    margin: auto;
+}
+
+#Contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(17, 16, 16, 0.9);
+    margin-top: auto;
+    padding: 1vw;
+    width: 100%;
+}
+
+#Contact>div {
+    margin-left: 2vw;
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: bold;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    text-shadow: 0.08rem 0.08rem rgb(137, 153, 152);
+}
+
+#Contact>ul {
+    margin-right: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+.bi-twitter,
+.bi-instagram,
+.bi-facebook {
+    height: auto;
+    color: #ffffff;
+    text-shadow: 0.1rem 0.1rem rgb(12, 184, 169);
+}
+
+/* input selector */
+#coords {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    margin: 1.5vh auto;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(90deg, #ad4c92, #c44b8b, #d74c80, #e85074, #f45865, #fc6554, #ff7442, #ff852e);
+    border-radius: 2em;
+    padding: 1vh 1vw;
+    gap: 2rem;
+}
+
+#coords>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#latInput,
+#lngInput {
+    padding: 1vw;
+    margin: 1vw;
+    border: 1vh solid #ccc;
+    border-radius: 1vw;
+    width: 10vw;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+#latInput:focus,
+#lngInput:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 3px rgba(102, 175, 233, 0.6);
+}
+
+#submit {
+    padding: 1vw;
+    margin: 1vw;
+    border: 1vh solid #ccc;
+    border-radius: 1vw;
+    width: 10vw;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#submit:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 3px rgba(102, 175, 233, 0.6);
+}
+
+.coordsTitle {
+    /* use "Merriweather" font */
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-style: bold;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    text-shadow: 0.08rem 0.08rem rgb(137, 153, 152);
+}
+
+@media screen and (max-width: 960px) {
+    #weather-code img {
+        width: 2em;
+    }
+
+    #ip-location {
+        font-size: 1.5vh;
+    }
+
+    #temp .numbers,
+    #apparent_temp .numbers,
+    #cloud .numbers,
+    #humidity .numbers {
+        font-size: 2vh;
+    }
+
+    #temp .title,
+    #apparent_temp .title,
+    #cloud .title,
+    #humidity .title {
+        font-size: 2vh;
+    }
+
+    #shower,
+    #wind,
+    #pressure {
+        font-size: 2vh;
+    }
+
+    #Forecast {
+        max-width: 100%;
+        flex-direction: column;
+        border-radius: 0.5em;
+        padding: 1vw;
+        gap: 1rem;
+    }
+
+    .day-weather {
+        flex-direction: row;
+        max-width: 100%;
+        gap: 1rem;
+        border-radius: 0.5em;
+        align-items: center;
+    }
+
+    .buttons button{
+        font-size: 2vh;
+        text-shadow: none;
+    }
+
+    #Statistics {
+        max-width: 95%;
+    }
+
+    #History {
+        max-width: 90%;
+        padding:5vw;
+    }
+
+    .dayBlock {
+        gap: 1rem;
+    }
+
+    .dropdown-area .dropdown-element {
+        font-size: 1.4vh;
+        text-shadow: none;
+    }
+
+    .day-weather {
+        font-size: smaller;
+        padding: 0.2vw;
+        margin: 0.2vw;
+    }
+
+    #table {
+        max-width: 20%;
+        font-size: 1.45vh;
+    }
+
+    #dropdown-statistics {
+        width: 100%;
+        padding: 1vh;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    #Current {
+        flex-direction: column;
+        align-items: center;
+    }
+    .circle {
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+    }
+
+    #ip-location {
+        font-size: 1.2vh;
+    }
+
+    .dashboard-left {
+        font-size: 1.25vh;
+    }
+
+    #temp .numbers, #apparent_temp .numbers, #cloud .numbers, #humidity .numbers {
+        font-size: 1vh;
+    }
+
+    #temp .title, #apparent_temp .title, #cloud .title, #humidity .title {
+        font-size: 1.5vh;
+    }
+
+    .coordsTitle {
+        font-size: 1.25vh;
+    }
+
+    #submit {
+        font-size: 1.25vh;
+    }
+    
+    #latInput, #lngInput {
+        border: -1vh solid #ccc;
+        width: 25vw;
+    }
+
+    .dayBox-text {
+        font-size: 1vh;
+    }
+
+    .day-weather {
+        margin: 0.4vw;
+    }
+
+    .buttons button {
+        font-size: 1vh;
+    }
+
+    #chartbox {
+        height: 40%;
+        width: 100%;
+    }
+
+    #weatherList {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dayBlock {
+        font-size: 1.2vh;
+    }
+
+    #table {
+        font-size: 0.8vh;
+    }
+
+    #table > tbody {
+        text-shadow: 0.1rem 0.1rem rgb(43rgb(174, 170, 170));
+        letter-spacing: 0.1rem;
+        color: rgb(209, 230, 222);
+    }
+    
+    tbody > tr:hover {
+        font-size: 1vh;
+        color: tomato;
+    }
+
+    body {
+        background-position: center;
+    }
+}
+
+/* list animation */
+.squareList-item,
+.circleList-item {
+    position: absolute;
+    border: 1px solid white;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    list-style: none;
+    opacity: 0;
+    z-index: 0;
+}
+
+.squareList-item {
+    top: 40vh;
+    left: 60vw;
+    animation: square 10s linear infinite;
+}
+
+.squareList li:nth-child(2) {
+    top: 80vh;
+    left: 10vw;
+    animation-delay: 2s;
+}
+
+.squareList li:nth-child(3) {
+    top: 10vh;
+    left: 85vw;
+    animation-delay: 4s;
+}
+
+.squareList li:nth-child(4) {
+    top: 10vh;
+    left: 10vw;
+    animation-delay: 6s;
+}
+
+.squareList li:nth-child(5) {
+    top: 80vh;
+    left: 10vw;
+    animation-delay: 8s;
+}
+
+.circleList-item {
+    bottom: 0;
+    left: 15vw;
+    animation: circle 10s linear infinite;
+}
+
+.circleList li:nth-child(2) {
+    left: 35vw;
+    animation-delay: 2s;
+}
+
+.circleList li:nth-child(3) {
+    left: 55vw;
+    animation-delay: 4s;
+}
+
+.circleList li:nth-child(4) {
+    left: 75vw;
+    animation-delay: 6s;
+}
+
+.circleList li:nth-child(5) {
+    left: 90vw;
+    animation-delay: 8s;
+}
+
+@keyframes square {
+    0% {
+        transform: scale(0) rotateY(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(5) rotateY(1000deg);
+        opacity: 0;
+    }
+}
+
+@keyframes circle {
+    0% {
+        transform: scale(0) rotateY(0deg);
+        opacity: 1;
+        bottom: 0;
+        border-radius: 0;
+    }
+
+    100% {
+        transform: scale(5) rotateY(1000deg);
+        opacity: 0;
+        bottom: 90vh;
+        border-radius: 50%;
+    }
+}
